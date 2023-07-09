@@ -1,0 +1,17 @@
+{{ extend 'navbar.html' }} {{ block contenu }}
+<div class="row">
+    {{for row in affiches:}}
+    <div class="column">
+        <div class="col-md-3">
+            <div class="card" style="width: 20rem;">
+                <img class="card-img-top" src="{{= URL('static', 'uploads/' + row.image, False)  }}" alt="Card image cap" style="width: 300px; height: 300px;">
+                <div class="card-body">
+                    <h5 class="card-title">Titre Film : {{= row.film_id.titre }}</h5>
+                    <a href="{{=URL('affiches', 'liste_affiches')}}" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#myModal">En savoir plus</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{pass}}
+</div>
+{{ end }}

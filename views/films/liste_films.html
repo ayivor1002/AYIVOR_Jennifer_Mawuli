@@ -1,0 +1,57 @@
+{{ extend "navbar.html" }}
+
+{{ block contenu }}
+
+<a href="{{=URL('films', 'ajout_film')}}" class="btn btn-primary">AJOUTER UN NOUVEAU FILM</a>
+
+<center>
+    <h1>
+        LISTE DES FILMS
+    </h1>
+</center>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Numéro d'ordre</th>
+      <th scope="col">Titre Film</th>
+      <th scope="col">Description Film</th>
+      <th scope="col">Date Sortie</th>
+      <th scope="col">Realisateur</th>
+      <th scope="col">Durée</th>
+      <th style="text-align: center;">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    {{ for row in films: }}
+    
+    <tr>
+      <td>
+        {{ = row.id }}
+      </td>
+      <td>
+        {{ = row.titre }}
+      </td>
+      <td>
+        {{ = row.description }}
+      </td>
+      <td>
+        {{ = row.date_sortie }}
+      </td>
+      <td>
+        {{ = row.realisateur }}
+      </td>
+      <td>
+        {{ = row.duree }}
+      </td>
+      <td style="text-align: center;">
+        <a href="{{=URL('films','modifier_film', args=row.id)}}" class="btn btn-warning">Modifier</a>
+        <a class="btn rounded-pill btn-danger" href="{{=URL('films', 'supprimer_film', vars={'id': row.id})}}" onclick="return confirmDelete();">Supprimer</a>
+    </td>
+    </tr>
+    
+    {{ pass }}
+  </tbody>
+</table>
+{{ end }}

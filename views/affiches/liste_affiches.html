@@ -1,0 +1,57 @@
+{{ extend "navbar.html" }}
+
+{{ block contenu }}
+
+
+<a href="{{=URL('affiches', 'ajout_affiche')}}" class="btn btn-primary">AJOUTER UNE NOUVELLE AFFICHE</a>
+
+<center>
+    <h1>
+        LISTE DES AFFICHES
+    </h1>
+</center>
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Numéro d'ordre</th>
+        <th scope="col">Numéro affiche</th>
+        <th scope="col">Date Projection</th>
+        <th scope="col">Image affiche</th>
+        <th scope="col">Film correspondant</th>
+        <th style="text-align: center;">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+      {{ for row in affiches :}}
+      
+      <tr>
+        <td>
+          {{ = row.id }}
+        </td>
+        <td>
+          {{ = row.numero_affiche }}
+        </td>
+        <td>
+          {{ = row.date_projection }}
+        </td>
+        <td>
+          <img src="{{= URL('static', 'uploads/' + row.image, False) }}" style="width: 50px; height: 50px;">
+        </td>
+        <td>
+          {{ = row.film_id.titre }}
+        </td>
+        <td style="text-align: center;">
+          <a href="{{=URL('affiches','modifier_affiche', args=row.id)}}" class="btn btn-warning">Modifier</a>
+
+          <a class="btn rounded-pill btn-danger" href="{{=URL('affiches', 'supprimer_affiche', vars={'id': row.id})}}" onclick="return confirmDelete();">Supprimer</a>
+          </td>
+      </tr>
+      
+      {{ pass }}
+    </tbody>
+</table>
+  
+
+{{ end }}

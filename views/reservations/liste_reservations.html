@@ -1,0 +1,54 @@
+{{ extend "navbar.html" }}
+
+{{ block contenu }}
+
+
+<a href="{{=URL('reservations', 'ajout_reservation')}}" class="btn btn-primary">AJOUTER UNE NOUVELLE RESERVATION</a>
+
+<center>
+    <h1>
+        LISTE DES RESERVATIONS
+    </h1>
+</center>
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Numéro d'ordre</th>
+        <th scope="col">Nombre Places</th>
+        <th scope="col">Numéro Affiche</th>
+        <th scope="col">Utilisateur</th>
+        <th style="text-align: center;">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+      {{ for row in reservations: }}
+      
+
+      <tr>
+        <td>
+          {{ = row.id }}
+        </td>
+        <td>
+          {{ = row.nombre_places }}
+        </td>
+        <td>
+          {{ = row.affiche_id.numero_affiche }}
+        </td>
+        <td>
+          {{ = row.utilisateur_id.first_name }} {{ = row.utilisateur_id.last_name }}
+        </td>
+        <td style="text-align: center;">
+          <a href="{{=URL('reservations','modifier_reservation', args=row.id)}}" class="btn btn-warning">Modifier</a>
+          <a class="btn rounded-pill btn-danger" href="{{=URL('reservations', 'supprimer_reservation', vars={'id': row.id})}}" onclick="return confirmDelete();">Supprimer</a>
+      </td>
+        
+      </tr>
+      
+      {{ pass }}
+    </tbody>
+</table>
+  
+
+{{ end }}
